@@ -5,10 +5,14 @@
 ### Zagon
 
 ```bash
+git clone https://github.com/anzepintar/Chat-Server.git
+cd Chat-Server
 javac *.java
-// v ločenih oknih
+# v ločenih terminalih
 java ChatServer
+#
 java ChatClient
+#
 java ChatClient
 ```
 
