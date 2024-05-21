@@ -17,6 +17,21 @@ java ChatClient
 #
 java ChatClient
 ```
+### Testni podatki
+
+```bash
+Client 1:
+    Lokacija ključa: keys/aaa.private
+    Geslo ključa: aaapwd
+
+Client 2:
+    Lokacija ključa: keys/bbb.private
+    Geslo ključa: bbbpwd
+
+Client 3:
+    Lokacija ključa: keys/ccc.private
+    Geslo ključa: cccpwd
+```
 
 ### Prijava
 
