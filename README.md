@@ -14,7 +14,14 @@ java ChatServer
 java ChatClient
 #
 java ChatClient
+#
+java ChatClient
 ```
+
+### Prijava
+
+Za prijavo uporabnik vnese lokacijo do svojega zasebnega ključa iz katerega se tudi pridobi njegovo uporabniško ime.
+Pri prijavi mora vnesti tudi geslo njegovega zasebnega ključa.
 
 ### Javna sporočila
 
@@ -29,12 +36,14 @@ Privatna sporočila se pošilja, tako da se omeni uporabnika. Na primer:
 
 ## Specifikacija formata kodiranja sporočil
 
-### aMessage - sproročilo za nastavitev imena (client -> server)
-`{a}{čas}{željeno ime}`
 ### jMessage - javno spročilo
-`{j}{čas}{pošiljatelj}{sporočilo}`
+`{j}{čas}{sporočilo}`
 ### zMessage - zasebno spročilo
 `{z}{čas}{pošiljatelj}{prejemnik}{sporočilo}`
+
+Polje pošiljatelj je obvezno samo pri pošiljanju sporočila s strežnika na odjemalca.
+Ime pošiljatelja se pridobi iz ključa uporabnika.
+
 ### sMessage - sistemsko sporočilo o napaki (server -> client)
 `{s}{čas}{napaka}`
 
@@ -48,58 +57,43 @@ User 1
 
 ```bash
 ######  ChatClient  ######
-[client] set name: aa
+[client] relative certificate path, e.g. keys/mycert.private: keys/aaa.private
+[client] keystore passphrase: aaapwd
 [client] connecting to chat server ...
 [client] connected
-[client] your name is now aa.
-živjo
-11:03:41 <@aa> živjo
-11:03:44 <@bb> živjo
-11:03:48 <@cc> živjo
-@bb dajva se pogovarjat brez cc
-11:04:21 <@bb> (zasebno) ok
-11:04:44 <@cc> o čem se zasebno pogovarjata, jaz nič ne vidim
-o ničemer
-11:04:57 <@aa> o ničemer
-11:05:00 <@bb> o ničemer
-@dd še ti mi kaj povej brez da cc vidi
-[server]  user dd does not exist
+to je javno sporočilo poslano z aaa
+22:07:59 <@aaa> to je javno sporočilo poslano z aaa
+@bbb to je zasebno sporočilo poslano z aaa, namenjeno za bbb
+22:08:59 <@bbb> (zasebno) to je zasebno sporočilo poslano z bbb, namenjeno aaa
+22:09:25 <@ccc> Jaz sem ccc in spet ne vidim nobenih zasebnih pogovorov
 ```
 
 User 2
 
 ```bash
 ######  ChatClient  ######
-[client] set name: bb
+[client] relative certificate path, e.g. keys/mycert.private: keys/aaa.private
+[client] keystore passphrase: aaapwd
 [client] connecting to chat server ...
 [client] connected
-[client] your name is now bb.
-11:03:41 <@aa> živjo
-živjo
-11:03:44 <@bb> živjo
-11:03:48 <@cc> živjo
-11:04:00 <@aa> (zasebno) dajva se pogovarjat brez cc
-@aa ok
-11:04:44 <@cc> o čem se zasebno pogovarjata, jaz nič ne vidim
-11:04:57 <@aa> o ničemer
-o ničemer
-11:05:00 <@bb> nič
+to je javno sporočilo poslano z aaa
+22:07:59 <@aaa> to je javno sporočilo poslano z aaa
+@bbb to je zasebno sporočilo poslano z aaa, namenjeno za bbb
+22:08:59 <@bbb> (zasebno) to je zasebno sporočilo poslano z bbb, namenjeno aaa
+22:09:25 <@ccc> Jaz sem ccc in spet ne vidim nobenih zasebnih pogovorov
 ```
 
 User 3
 
 ```bash
 ######  ChatClient  ######
-[client] set name: cc
+[client] relative certificate path, e.g. keys/mycert.private: keys/aaa.private
+[client] keystore passphrase: aaapwd
 [client] connecting to chat server ...
 [client] connected
-[client] your name is now cc.
-11:03:41 <@aa> živjo
-11:03:44 <@bb> živjo
-živjo
-11:03:48 <@cc> živjo
-o čem se zasebno pogovarjata, jaz nič ne vidim
-11:04:44 <@cc> o čem se zasebno pogovarjata, jaz nič ne vidim
-11:04:57 <@aa> o ničemer
-11:05:00 <@bb> o ničemer
+to je javno sporočilo poslano z aaa
+22:07:59 <@aaa> to je javno sporočilo poslano z aaa
+@bbb to je zasebno sporočilo poslano z aaa, namenjeno za bbb
+22:08:59 <@bbb> (zasebno) to je zasebno sporočilo poslano z bbb, namenjeno aaa
+22:09:25 <@ccc> Jaz sem ccc in spet ne vidim nobenih zasebnih pogovorov
 ```
