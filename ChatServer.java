@@ -1,3 +1,5 @@
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
 import java.net.*;
 import java.time.Instant;
@@ -6,13 +8,15 @@ import java.util.*;
 public class ChatServer {
 
 	protected int serverPort = 1234;
+	SSLSocketFactory factory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+	SSLSocket sslsocket = (SSLSocket) factory.createSocket("address", serverPort); //SSL port=443
 	protected HashMap<Socket, String> clients = new HashMap<>();
 
 	public static void main(String[] args) throws Exception {
 		new ChatServer();
 	}
 
-	public ChatServer() {
+	public ChatServer() throws IOException {
 		ServerSocket serverSocket = null;
 
 		// create socket

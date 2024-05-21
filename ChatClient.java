@@ -1,3 +1,5 @@
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
 import java.net.*;
 import java.text.DateFormat;
@@ -7,8 +9,10 @@ import java.util.Date;
 
 
 public class ChatClient extends Thread {
-	protected int serverPort = 1234;
+	protected int serverPort = 443;
 	public static String name;
+	SSLSocketFactory factory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+	SSLSocket sslsocket = (SSLSocket) factory.createSocket("address", serverPort); //SSL port=443
 
 	public static void main(String[] args) throws Exception {
 		new ChatClient();
